@@ -2,7 +2,7 @@
 
 namespace EasyNetQTalk.Web
 {
-    internal class PointHub : Hub
+    public class PointHub : Hub
     {
         private readonly PointBroadcaster _broadcaster;
 

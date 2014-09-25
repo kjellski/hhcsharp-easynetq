@@ -8,20 +8,21 @@ namespace EasyNetQTalk.Web
 {
     public class PointBroadcaster
     {
-        private static readonly Lazy<PointBroadcaster> _broadcaster = new Lazy<PointBroadcaster>(()
+        private static readonly Lazy<PointBroadcaster> Broadcaster = new Lazy<PointBroadcaster>(()
             => new PointBroadcaster(GlobalHost.ConnectionManager.GetHubContext<PointHub>().Clients, RabbitMQConfiguration.ConnectionString));
 
         // ReSharper disable once PrivateFieldCanBeConvertedToLocalVariable
-        private static readonly IBus Bus = RabbitHutch.CreateBus(RabbitMQConfiguration.ConnectionString);
+        private readonly IBus _rabbitMQBus;
 
         public Point LatestPoint = new Point(0, 0);
         private readonly IHubConnectionContext _clients;
 
         private PointBroadcaster(IHubConnectionContext clients, string rabbitMQConnectionString)
         {
+            _rabbitMQBus = RabbitHutch.CreateBus(RabbitMQConfiguration.ConnectionString);
             _clients = clients;
 
-            Bus.Subscribe<Point>("EasyNetQTalk.Web", point =>
+            _rabbitMQBus.Subscribe<Point>("EasyNetQTalk.Web", point =>
             {
                 LatestPoint = point;
                 _clients.All.updatePoint(point);
@@ -30,7 +31,7 @@ namespace EasyNetQTalk.Web
 
         public static PointBroadcaster Instance
         {
-            get { return _broadcaster.Value; }
+            get { return Broadcaster.Value; }
         }
     }
 }

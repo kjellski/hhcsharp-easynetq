@@ -9,6 +9,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyNetQTalk.Web", "EasyNet
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyNetQTalk.ConsolePublisher", "EasyNetQTalk.ConsolePublisher\EasyNetQTalk.ConsolePublisher.csproj", "{DD834AF1-8008-4B26-BEEA-8ECFD2E86F55}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyNetQTalk.ConsoleSubscriber", "EasyNetQTalk.ConsoleSubscriber\EasyNetQTalk.ConsoleSubscriber.csproj", "{276F0120-65B3-4099-93A0-A1B3569A764A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{0F0887F6-73F6-4DE4-874C-C13303332AC5}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\..\Program Files (x86)\RabbitMQ Server\rabbitmq_server-3.3.5\sbin\rabbitmq-server.bat = ..\..\..\..\Program Files (x86)\RabbitMQ Server\rabbitmq_server-3.3.5\sbin\rabbitmq-server.bat
+		StartConsoles.bat = StartConsoles.bat
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +35,10 @@ Global
 		{DD834AF1-8008-4B26-BEEA-8ECFD2E86F55}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD834AF1-8008-4B26-BEEA-8ECFD2E86F55}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD834AF1-8008-4B26-BEEA-8ECFD2E86F55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{276F0120-65B3-4099-93A0-A1B3569A764A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{276F0120-65B3-4099-93A0-A1B3569A764A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{276F0120-65B3-4099-93A0-A1B3569A764A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{276F0120-65B3-4099-93A0-A1B3569A764A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

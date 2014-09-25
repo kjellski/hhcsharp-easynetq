@@ -13,7 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyNetQTalk.ConsoleSubscri
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{0F0887F6-73F6-4DE4-874C-C13303332AC5}"
 	ProjectSection(SolutionItems) = preProject
-		..\..\..\..\Program Files (x86)\RabbitMQ Server\rabbitmq_server-3.3.5\sbin\rabbitmq-server.bat = ..\..\..\..\Program Files (x86)\RabbitMQ Server\rabbitmq_server-3.3.5\sbin\rabbitmq-server.bat
 		StartConsoles.bat = StartConsoles.bat
 	EndProjectSection
 EndProject

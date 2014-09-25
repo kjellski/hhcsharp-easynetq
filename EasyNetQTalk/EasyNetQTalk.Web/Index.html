@@ -5,18 +5,29 @@
     <script src="Scripts/jquery-1.10.2.min.js"></script>
     <script src="Scripts/jquery.signalR-2.0.2.min.js"></script>
     <script src="signalr/hubs"></script>
-</head>
-<body>
-    <canvas id="canvas" width="500" height="500"></canvas>
-
     <script type="text/javascript">
-        $(function() {
-            var pointHub = $.connection.pointHub;
-
-            pointHub.client.updatePoint = function(point) {
-                console.log("Point( " + point.x + ", " + point.y + ")");
-            }
+        $.ajax('/api/point').done(function(done) {
+            console.debug('called /api/point.');
         });
     </script>
-</body>
+</head>
+    <body>
+        <p>Draw on me:</p>
+        <canvas id="canvas" width="500" height="500"></canvas>
+
+        <script type="text/javascript">
+            $(function () {
+                // this actually instantiates the PointBroadcaster, before, no Instance will be accessed
+                var pointHub = $.connection.pointHub;
+
+                pointHub.client.updatePoint = function (point) {
+                    console.log("Point(" + point.X + ", " + point.Y + ")");
+                };
+
+                $.connection.hub.start().done(function() {
+                    console.debug('hub started.');
+                });
+            });
+        </script>
+    </body>
 </html>

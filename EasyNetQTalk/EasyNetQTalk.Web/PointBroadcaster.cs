@@ -3,6 +3,7 @@ using EasyNetQ;
 using EasyNetQTalk.Core;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
+using Newtonsoft.Json;
 
 namespace EasyNetQTalk.Web
 {
@@ -15,17 +16,18 @@ namespace EasyNetQTalk.Web
         private readonly IBus _rabbitMQBus;
 
         public Point LatestPoint = new Point(0, 0);
-        private readonly IHubConnectionContext _clients;
+        public readonly IHubConnectionContext 
+            Clients;
 
         private PointBroadcaster(IHubConnectionContext clients, string rabbitMQConnectionString)
         {
-            _rabbitMQBus = RabbitHutch.CreateBus(RabbitMQConfiguration.ConnectionString);
-            _clients = clients;
+            _rabbitMQBus = RabbitHutch.CreateBus(rabbitMQConnectionString);
+            Clients = clients;
 
             _rabbitMQBus.Subscribe<Point>("EasyNetQTalk.Web", point =>
             {
                 LatestPoint = point;
-                _clients.All.updatePoint(point);
+                Clients.All.updatePoint(point);
             });
         }
 

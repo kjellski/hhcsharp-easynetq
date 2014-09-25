@@ -1,0 +1,19 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>EasyNetQTalk - Points</title>
+</head>
+<body>
+    <canvas id="canvas" width="500" height="500"></canvas>
+
+    <script src="Scripts/jquery-1.10.2.min.js"></script>
+    <script src="Scripts/jquery.signalR-2.0.2.min.js"></script>
+    <script src="signalr/hubs"></script>
+    <script type="text/javascript">
+        var pointHub = $.connection.pointHub;
+        pointHub.client.updatePoint = function (point) {
+            console.log("Point( " + point.x + ", " + point.y + ")");
+        }
+    </script>
+</body>
+</html>

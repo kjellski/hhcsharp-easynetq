@@ -17,20 +17,21 @@
 
         <script type="text/javascript">
             $(function() {
-                var canvas = document.getElementById("canvas");
-                canvas.addEventListener('click', function(event) {
-                    var x = event.pageX - canvas.offsetLeft,
-                        y = event.pageY - canvas.offsetTop;
-                    drawPoint({ X: x, Y: y });
-
-                });
-                
-                //this actually instantiates the PointBroadcaster, before, no Instance will be accessed 
                 var pointHub = $.connection.pointHub;
-                pointHub.client.updatePoint = function(point) {
+                var canvas = document.getElementById("canvas");
+
+                // function to be called by server
+                pointHub.client.updatePoint = function (point) {
                     console.log("Point(" + point.X + ", " + point.Y + ")");
                     drawPoint(point);
                 };
+
+                canvas.addEventListener('click', function(event) {
+                    var x = event.pageX - canvas.offsetLeft,
+                        y = event.pageY - canvas.offsetTop;
+                    // implicit method on server 
+                    pointHub.server.publishPoint({ X: x, Y: y });
+                });
 
                 // draw the point on the canvas 
                 var ctx = canvas.getContext("2d");

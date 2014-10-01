@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.SignalR;
+﻿using EasyNetQTalk.Core;
+using Microsoft.AspNet.SignalR;
 
 namespace EasyNetQTalk.Web
 {
@@ -14,6 +15,11 @@ namespace EasyNetQTalk.Web
         public PointHub(PointBroadcaster broadcaster)
         {
             _broadcaster = broadcaster;
+        }
+
+        public void PublishPoint(Point point)
+        {
+            _broadcaster.PublishPoint(point);
         }
     }
 }

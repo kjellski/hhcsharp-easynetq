@@ -31,6 +31,11 @@ namespace EasyNetQTalk.Web
             });
         }
 
+        public void PublishPoint(Point point)
+        {
+            _rabbitMQBus.Publish(point);
+        }
+
         public static PointBroadcaster Instance
         {
             get { return Broadcaster.Value; }

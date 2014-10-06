@@ -16,8 +16,7 @@ namespace EasyNetQTalk.Web
         private readonly IBus _rabbitMQBus;
 
         public Point LatestPoint = new Point(0, 0);
-        public readonly IHubConnectionContext 
-            Clients;
+        public readonly IHubConnectionContext Clients;
 
         private PointBroadcaster(IHubConnectionContext clients, string rabbitMQConnectionString)
         {
@@ -33,7 +32,9 @@ namespace EasyNetQTalk.Web
 
         public void PublishPoint(Point point)
         {
-            _rabbitMQBus.Publish(point);
+            var topic = point.GetQuadrant();
+
+            _rabbitMQBus.Publish(point, topic);
         }
 
         public static PointBroadcaster Instance

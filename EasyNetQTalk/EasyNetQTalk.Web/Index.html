@@ -7,43 +7,84 @@
     <script src="signalr/hubs"></script>
     <script type="text/javascript">
         // just make one call to the point route, just to instantiate the hub
-        $.ajax('/api/point').done(function(done) {
+        $.ajax('/api/point').done(function (done) {
             console.debug('called /api/point.');
         });
     </script>
 </head>
-    <body>
-        <canvas id="canvas" width="500" height="500" style="border: 1px solid black;"></canvas>
+<body>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>click here!</th>
+                <th>see here</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <canvas id="canvas" width="500" height="500" style="border: 1px solid black;"></canvas>
+                </td>
+                <td>
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <canvas id="canvas-2" width="250" height="250" style="border: 1px solid black;"></canvas>
+                                </td>
+                                <td>
+                                    <canvas id="canvas-1" width="250" height="250" style="border: 1px solid black;"></canvas>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <canvas id="canvas-3" width="250" height="250" style="border: 1px solid black;"></canvas>
+                                </td>
+                                <td>
+                                    <canvas id="canvas-4" width="250" height="250" style="border: 1px solid black;"></canvas>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
-        <script type="text/javascript">
-            $(function() {
-                var pointHub = $.connection.pointHub;
-                var canvas = document.getElementById("canvas");
+    <script type="text/javascript">
+        $(function () {
+            var pointHub = $.connection.pointHub;
+            var canvas = document.getElementById("canvas");
+            var canvas1 = document.getElementById("canvas-1");
+            var canvas2 = document.getElementById("canvas-2");
+            var canvas3 = document.getElementById("canvas-3");
+            var canvas4 = document.getElementById("canvas-4");
 
-                // function to be called by server
-                pointHub.client.updatePoint = function (point) {
-                    console.log("Point(" + point.X + ", " + point.Y + ")");
-                    drawPoint(point);
-                };
+            // function to be called by server
+            pointHub.client.updatePoint = function (point) {
+                console.log("Point(" + point.X + ", " + point.Y + ")");
+                drawPoint(point);
+            };
 
-                canvas.addEventListener('click', function(event) {
-                    var x = event.pageX - canvas.offsetLeft,
-                        y = event.pageY - canvas.offsetTop;
-                    // implicit method on server 
-                    pointHub.server.publishPoint({ X: x, Y: y });
-                });
-
-                // draw the point on the canvas 
-                var ctx = canvas.getContext("2d");
-                var drawPoint = function (point) {
-                    ctx.fillRect(point.X, point.Y, 5, 5);
-                };
-
-
-                $.connection.hub.start().done(function () {
-                    console.debug('hub started.');
-                });
+            canvas.addEventListener('click', function (event) {
+                var x = event.pageX - canvas.offsetLeft,
+                    y = event.pageY - canvas.offsetTop;
+                // implicit method on server
+                pointHub.server.publishPoint({ X: x, Y: y });
             });
-        </script>
-    </body>
+
+            // draw the point on the canvas
+            var ctx = canvas.getContext("2d");
+            var drawPoint = function (point) {
+                ctx.fillRect(point.X, point.Y, 5, 5);
+            };
+
+
+            $.connection.hub.start().done(function () {
+                console.debug('hub started.');
+            });
+        });
+    </script>
+</body>
+
 </html>

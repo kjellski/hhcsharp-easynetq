@@ -1,4 +1,5 @@
 ﻿$(function () {
+    // coordinates helper
     var relMouseCoords = function (event) {
         var totalOffsetX = 0;
         var totalOffsetY = 0;
@@ -19,29 +20,32 @@
     }
     HTMLCanvasElement.prototype.relMouseCoords = relMouseCoords;
 
+    // ------------------------------------------------------------------------------------
+    // SignalR connection setup
+    // ------------------------------------------------------------------------------------
     var pointHub = $.connection.pointHub;
-    var canvas = document.getElementById("canvas");
 
-    var canvas1 = document.getElementById("canvas-1");
-    var canvas2 = document.getElementById("canvas-2");
-    var canvas3 = document.getElementById("canvas-3");
-    var canvas4 = document.getElementById("canvas-4");
-
-    // function to be called by server
-    pointHub.client.updatePoint = function (point) {
-        console.log("Point(" + point.X + ", " + point.Y + ")");
-        drawPoint(point);
-    };
+    // get all canvas elements
+    var canvasIdEndings = ["", "-1", "-2", "-3", "-4"];
+    var allCanvasElemens = _.map(canvasIdEndings, function (nameEnd) { return document.getElementById("canvas" + nameEnd); });
+    var canvas = allCanvasElemens.shift(); // removes first and returns it
+    var quadrants = allCanvasElemens;
 
     canvas.addEventListener('click', function (event) {
         var coordinates = canvas.relMouseCoords(event);
         // implicit method on server
         pointHub.server.publishPoint({ X: coordinates.x, Y: coordinates.y });
     });
+    
+    // function to be called by server
+    pointHub.client.updatePoint = function (point) {
+        console.log("Point(" + point.X + ", " + point.Y + ")");
+        drawPoint(point, canvas);
+    };
 
     // draw the point on the canvas
-    var ctx = canvas.getContext("2d");
-    var drawPoint = function (point) {
+    var drawPoint = function (point, canvasElemet) {
+        var ctx = canvasElemet.getContext("2d");
         ctx.fillRect(point.X, point.Y, 5, 5);
     };
 

@@ -34,10 +34,10 @@ namespace EasyNetQTalk.Core
              */
             if (point.X >= 250)
             {
-                return point.Y >= 250 ? "IV" : "I";
+                return point.Y >= 250 ? "4" : "1";
             }
 
-            return point.Y >= 250 ? "III" : "II";
+            return point.Y >= 250 ? "3" : "2";
         }
     }
 }

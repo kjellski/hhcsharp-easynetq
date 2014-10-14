@@ -23,18 +23,23 @@ namespace EasyNetQTalk.Web
             _rabbitMQBus = RabbitHutch.CreateBus(rabbitMQConnectionString);
             Clients = clients;
 
-            _rabbitMQBus.Subscribe<Point>("EasyNetQTalk.Web", point =>
+            _rabbitMQBus.Subscribe<Point>("canvas", point =>
             {
                 LatestPoint = point;
                 Clients.All.updatePoint(point);
             });
+             
+            // subscribe topic based
+            _rabbitMQBus.Subscribe<Point>("canvas-1", point => Clients.All.updatePoint1(point), x => x.WithTopic("1"));
+            _rabbitMQBus.Subscribe<Point>("canvas-2", point => Clients.All.updatePoint2(point), x => x.WithTopic("2"));
+            _rabbitMQBus.Subscribe<Point>("canvas-3", point => Clients.All.updatePoint3(point), x => x.WithTopic("3"));
+            _rabbitMQBus.Subscribe<Point>("canvas-4", point => Clients.All.updatePoint4(point), x => x.WithTopic("4"));
         }
 
         public void PublishPoint(Point point)
         {
-            var topic = point.GetQuadrant();
-
-            _rabbitMQBus.Publish(point, topic);
+            _rabbitMQBus.Publish(point); // type based
+            _rabbitMQBus.Publish(point, point.GetQuadrant()); // topic based
         }
 
         public static PointBroadcaster Instance

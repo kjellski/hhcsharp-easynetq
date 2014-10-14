@@ -8,10 +8,10 @@ namespace EasyNetQTalk.Core.Tests
     public class PointTests
     {
         [Test]
-        [TestCase(0, 0, "II")]
-        [TestCase(250, 0, "I")]
-        [TestCase(0, 250, "III")]
-        [TestCase(250, 250, "IV")]
+        [TestCase(0, 0, "2")]
+        [TestCase(250, 0, "1")]
+        [TestCase(0, 250, "3")]
+        [TestCase(250, 250, "4")]
         public void PointTest(int x, int y, String expectedQuadrant)
         {
             var point = new Point(x, y);

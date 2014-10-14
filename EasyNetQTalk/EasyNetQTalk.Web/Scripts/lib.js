@@ -26,31 +26,59 @@
     var pointHub = $.connection.pointHub;
 
     // get all canvas elements
-    var canvasIdEndings = ["", "-1", "-2", "-3", "-4"];
+    var canvasIdEndings = ["", "1", "2", "3", "4"];
     var allCanvasElemens = _.map(canvasIdEndings, function (nameEnd) { return document.getElementById("canvas" + nameEnd); });
     var canvas = allCanvasElemens.shift(); // removes first and returns it
     var quadrants = allCanvasElemens;
 
-    canvas.addEventListener('click', function (event) {
-        var coordinates = canvas.relMouseCoords(event);
-        // implicit method on server
-        pointHub.server.publishPoint({ X: coordinates.x, Y: coordinates.y });
-    });
-    
-    // function to be called by server
+    // functions to be called by server
     pointHub.client.updatePoint = function (point) {
         console.log("Point(" + point.X + ", " + point.Y + ")");
         drawPoint(point, canvas);
     };
 
+    // hackety hack ;)
+    var createUpdateFunction = function (quadrantCanvas, quadrantCanvasId) {
+        return function (point) {
+            var thisCanvas = quadrantCanvas;
+            var thisId = quadrantCanvasId;
+            var canvasNumber = thisId.slice(-1);
+
+            if (canvasNumber === "1")
+                point.X = point.X - 250;
+            if (canvasNumber === "3")
+                point.Y = point.Y - 250;
+            if (canvasNumber === "4")
+            {
+                point.X = point.X - 250;
+                point.Y = point.Y - 250;
+            }
+
+            console.log("Point(" + point.X + ", " + point.Y + ") in quadrant " + thisId);
+            drawPoint(point, thisCanvas);
+        };
+    };
+
+    for (var i = 0; i < quadrants.length; i++) {
+        var quadrant = quadrants[i];
+        var quadrantId = quadrant.id;
+        pointHub.client["updatePoint" + quadrantId.slice(-1)] = createUpdateFunction(quadrant, quadrantId);
+    }
+
     // draw the point on the canvas
-    var drawPoint = function (point, canvasElemet) {
-        var ctx = canvasElemet.getContext("2d");
+    var drawPoint = function (point, canvasElement) {
+        var ctx = canvasElement.getContext("2d");
         ctx.fillRect(point.X, point.Y, 5, 5);
     };
 
-
     $.connection.hub.start().done(function () {
         console.debug('hub started.');
+        canvas.addEventListener('click', function (event) {
+            var coordinates = canvas.relMouseCoords(event);
+            // implicit method on server
+            pointHub.server.publishPoint({ X: coordinates.x, Y: coordinates.y });
+        });
     });
+
+    window.pointHub = pointHub;
 });

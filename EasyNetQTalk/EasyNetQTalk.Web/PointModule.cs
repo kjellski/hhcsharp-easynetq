@@ -1,6 +1,4 @@
-﻿using System.Reactive.Subjects;
-using EasyNetQTalk.Core;
-using Nancy;
+﻿using Nancy;
 using Newtonsoft.Json;
 
 namespace EasyNetQTalk.Web

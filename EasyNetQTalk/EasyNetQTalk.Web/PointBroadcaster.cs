@@ -3,7 +3,6 @@ using EasyNetQ;
 using EasyNetQTalk.Core;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
-using Newtonsoft.Json;
 
 namespace EasyNetQTalk.Web
 {
@@ -12,11 +11,12 @@ namespace EasyNetQTalk.Web
         private static readonly Lazy<PointBroadcaster> Broadcaster = new Lazy<PointBroadcaster>(()
             => new PointBroadcaster(GlobalHost.ConnectionManager.GetHubContext<PointHub>().Clients, RabbitMQConfiguration.ConnectionString));
 
+        public readonly IHubConnectionContext Clients;
+
         // ReSharper disable once PrivateFieldCanBeConvertedToLocalVariable
         private readonly IBus _rabbitMQBus;
 
         public Point LatestPoint = new Point(0, 0);
-        public readonly IHubConnectionContext Clients;
 
         private PointBroadcaster(IHubConnectionContext clients, string rabbitMQConnectionString)
         {
@@ -28,7 +28,7 @@ namespace EasyNetQTalk.Web
                 LatestPoint = point;
                 Clients.All.updatePoint(point);
             });
-             
+
             // subscribe topic based
             _rabbitMQBus.Subscribe<Point>("canvas-1", point => Clients.All.updatePoint1(point), x => x.WithTopic("1"));
             _rabbitMQBus.Subscribe<Point>("canvas-2", point => Clients.All.updatePoint2(point), x => x.WithTopic("2"));
@@ -36,15 +36,15 @@ namespace EasyNetQTalk.Web
             _rabbitMQBus.Subscribe<Point>("canvas-4", point => Clients.All.updatePoint4(point), x => x.WithTopic("4"));
         }
 
+        public static PointBroadcaster Instance
+        {
+            get { return Broadcaster.Value; }
+        }
+
         public void PublishPoint(Point point)
         {
             _rabbitMQBus.Publish(point); // type based
             _rabbitMQBus.Publish(point, point.GetQuadrant()); // topic based
-        }
-
-        public static PointBroadcaster Instance
-        {
-            get { return Broadcaster.Value; }
         }
     }
 }

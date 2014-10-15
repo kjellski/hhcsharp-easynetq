@@ -1,8 +1,8 @@
-﻿using System;
+﻿using EasyNetQTalk.Web;
 using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartup(typeof(EasyNetQTalk.Web.Startup))]
+[assembly: OwinStartup(typeof (Startup))]
 
 namespace EasyNetQTalk.Web
 {
@@ -11,7 +11,7 @@ namespace EasyNetQTalk.Web
         public void Configuration(IAppBuilder app)
         {
             app.MapSignalR()
-               .UseNancy();
+                .UseNancy();
         }
     }
 }

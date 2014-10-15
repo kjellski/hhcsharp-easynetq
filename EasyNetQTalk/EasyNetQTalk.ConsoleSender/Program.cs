@@ -12,7 +12,7 @@ namespace EasyNetQTalk.ConsoleSender
             {
                 String input;
                 Console.WriteLine(
-@"Enter a Number to send a message with type: EasyNetQTalk.Core.MessageOne
+                    @"Enter a Number to send a message with type: EasyNetQTalk.Core.MessageOne
 Enter a Text to send a message with type: EasyNetQTalk.Core.MessageTwo
 Enter 'Quit' to quit.");
                 while ((input = Console.ReadLine()) != "Quit")
@@ -20,10 +20,10 @@ Enter 'Quit' to quit.");
                     int number;
                     if (Int32.TryParse(input, out number))
                     {
-                        bus.Send(QueueConfiguration.MessageQueueName, new MessageOne { Content = new ContentOne { Number = number } });
+                        bus.Send(QueueConfiguration.MessageQueueName, new MessageOne {Content = new ContentOne {Number = number}});
                         continue;
                     }
-                    bus.Send(QueueConfiguration.MessageQueueName, new MessageTwo { Content = new ContentTwo { Text = input } });
+                    bus.Send(QueueConfiguration.MessageQueueName, new MessageTwo {Content = new ContentTwo {Text = input}});
                 }
 
                 Console.WriteLine("Press <Enter> to exit...");

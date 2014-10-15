@@ -17,7 +17,7 @@ namespace EasyNetQTalk.ConsolePublisher
                 {
                     var point = GetPointFrom(input);
 
-                    if(point != null)
+                    if (point != null)
                         bus.Publish(point);
                 }
             }

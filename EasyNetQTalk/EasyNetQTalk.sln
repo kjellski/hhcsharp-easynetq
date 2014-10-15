@@ -14,6 +14,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{0F0887F6-73F6-4DE4-874C-C13303332AC5}"
 	ProjectSection(SolutionItems) = preProject
 		StartPublisherSubscriberConsoles.bat = StartPublisherSubscriberConsoles.bat
+		StartSenderReceiverConsoles.bat = StartSenderReceiverConsoles.bat
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyNetQTalk.Tests", "EasyNetQTalk.Tests\EasyNetQTalk.Tests.csproj", "{97647971-D04B-4690-AA75-5DB8CFA336B1}"
@@ -21,6 +22,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyNetQTalk.ConsoleSender", "EasyNetQTalk.ConsoleSender\EasyNetQTalk.ConsoleSender.csproj", "{0F9E49AA-9E24-433B-B9A4-533FA68E2A65}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyNetQTalk.ConsoleReceiver", "EasyNetQTalk.ConsoleReceiver\EasyNetQTalk.ConsoleReceiver.csproj", "{43F51A56-35CB-43B5-8A03-64F36DDFBF85}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyNetQTalk.ConsoleRequester", "EasyNetQTalk.ConsoleRequester\EasyNetQTalk.ConsoleRequester.csproj", "{6244CD58-7C36-4E17-8BDF-53A9327A8578}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyNetQTalk.ConsoleResponder", "EasyNetQTalk.ConsoleResponder\EasyNetQTalk.ConsoleResponder.csproj", "{A067314C-160B-47BC-88A5-81EFA5C1F8D6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -56,6 +61,14 @@ Global
 		{43F51A56-35CB-43B5-8A03-64F36DDFBF85}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43F51A56-35CB-43B5-8A03-64F36DDFBF85}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{43F51A56-35CB-43B5-8A03-64F36DDFBF85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6244CD58-7C36-4E17-8BDF-53A9327A8578}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6244CD58-7C36-4E17-8BDF-53A9327A8578}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6244CD58-7C36-4E17-8BDF-53A9327A8578}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6244CD58-7C36-4E17-8BDF-53A9327A8578}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A067314C-160B-47BC-88A5-81EFA5C1F8D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A067314C-160B-47BC-88A5-81EFA5C1F8D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A067314C-160B-47BC-88A5-81EFA5C1F8D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A067314C-160B-47BC-88A5-81EFA5C1F8D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

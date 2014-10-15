@@ -1,8 +1,8 @@
-﻿
-using System;
+﻿using System;
+using EasyNetQTalk.Core;
 using NUnit.Framework;
 
-namespace EasyNetQTalk.Core.Tests
+namespace EasyNetQTalk.Tests
 {
     [TestFixture]
     public class PointTests

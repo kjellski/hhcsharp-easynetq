@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyNetQTalk.ConsoleSubscri
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{0F0887F6-73F6-4DE4-874C-C13303332AC5}"
 	ProjectSection(SolutionItems) = preProject
-		StartConsoles.bat = StartConsoles.bat
+		StartPublisherSubscriberConsoles.bat = StartPublisherSubscriberConsoles.bat
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyNetQTalk.Tests", "EasyNetQTalk.Tests\EasyNetQTalk.Tests.csproj", "{97647971-D04B-4690-AA75-5DB8CFA336B1}"

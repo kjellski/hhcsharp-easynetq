@@ -8,12 +8,13 @@ namespace EasyNetQTalk.ConsoleSubscriber
     {
         static void Main(string[] args)
         {
-            var rabbitMQBus = RabbitHutch.CreateBus(RabbitMQConfiguration.ConnectionString);
+            using (var rabbitMQBus = RabbitHutch.CreateBus(RabbitMQConfiguration.ConnectionString))
+            {
+                rabbitMQBus.Subscribe<Point>("EasyNetQTalk.ConsoleSubscriber", point => Console.WriteLine("Point(" + point.X + ", " + point.Y + ")."));
 
-            rabbitMQBus.Subscribe<Point>("EasyNetQTalk.ConsoleSubscriber", point => Console.WriteLine("Point(" + point.X + ", " + point.Y + ")."));
-            
-            Console.WriteLine("Press <Enter> to quit...");
-            Console.ReadLine();
+                Console.WriteLine("Press <Enter> to quit...");
+                Console.ReadLine();
+            }
         }
     }
 }

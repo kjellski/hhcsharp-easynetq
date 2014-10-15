@@ -25,9 +25,6 @@ Enter 'Quit' to quit.");
                     }
                     bus.Send(QueueConfiguration.MessageQueueName, new MessageTwo {Content = new ContentTwo {Text = input}});
                 }
-
-                Console.WriteLine("Press <Enter> to exit...");
-                Console.ReadLine();
             }
         }
     }

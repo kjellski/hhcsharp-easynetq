@@ -11,7 +11,7 @@ namespace EasyNetQTalk.Web
         public void Configuration(IAppBuilder app)
         {
             app.MapSignalR()
-                .UseNancy();
+               .UseNancy();
         }
     }
 }
